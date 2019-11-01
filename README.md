@@ -33,6 +33,9 @@ UI
 Editor
 ----
 ### Restore inspector on Drag
+Most desired feature for me, and also the reason why I made this project. <br>
+When you clicked the asset to drag, inspector window will be changed to the asset's config. This made me crazy all the time.
+
 ![gif](gif/drag.gif)
 
 ### Move to Top, Move to Bottom
