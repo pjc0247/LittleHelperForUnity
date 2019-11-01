@@ -12,6 +12,12 @@ You can turn on/off each features in config window.
 
 UI
 ----
+### Distance Ruler
+![img](img/ruler.png)
+
+### Object Size
+![img](img/sizeview.png)
+
 ### AutoSize for Text
 ![gif](gif/autofit.gif)
 
