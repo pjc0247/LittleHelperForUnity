@@ -32,6 +32,9 @@ UI
 
 Editor
 ----
+### Restore inspector on Drag
+![gif](gif/drag.gif)
+
 ### Move to Top, Move to Bottom
 ![gif](gif/move_to_top.gif)
 
