@@ -21,4 +21,4 @@ Editor
 ![gif](gif/move_to_top.gif)
 
 ### Stick to Ground
-![gif](gif/stick_to_ground.gif)
+![gif](gif/sticktoground.gif)
