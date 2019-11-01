@@ -159,6 +159,9 @@ namespace LittleHelper {
                         text.fontSize = lastPropertyData.fontSize;
                     if (lastPropertyData.lineSpacing > 0)
                         text.lineSpacing = lastPropertyData.lineSpacing;
+                    text.horizontalOverflow = lastPropertyData.horizontal;
+                    text.verticalOverflow = lastPropertyData.vertical;
+                    text.color = lastPropertyData.color;
 
                     var lastFont = AssetDatabase.LoadAssetAtPath<Font>(AssetDatabase.GetAssetPath(lastPropertyData.fontAssetId));
                     if (lastFont != null)
@@ -250,6 +253,12 @@ namespace LittleHelper {
                             lastPropertyData.lineSpacing = textTarget.lineSpacing;
                         else if (m.currentValue.propertyPath == "m_FontData.m_Alignment")
                             lastPropertyData.textAlign = textTarget.alignment;
+                        else if (m.currentValue.propertyPath == "m_FontData.m_HorizontalOverflow")
+                            lastPropertyData.horizontal = textTarget.horizontalOverflow;
+                        else if (m.currentValue.propertyPath == "m_FontData.m_VerticalOverflow")
+                            lastPropertyData.vertical = textTarget.verticalOverflow;
+                        else if (m.currentValue.propertyPath.StartsWith("m_Color."))
+                            lastPropertyData.color = textTarget.color;
                     }
 
                     if (features.UI_BatchModifyForText)

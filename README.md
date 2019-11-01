@@ -18,6 +18,9 @@ UI
 ### Object Size
 ![img](img/sizeview.png)
 
+### Remember last property for Text
+![gif](gif/textdata.gif)
+
 ### AutoSize for Text
 ![gif](gif/autofit.gif)
 
