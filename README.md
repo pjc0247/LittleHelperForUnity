@@ -49,7 +49,9 @@ When you clicked the asset to drag, inspector window will be changed to the asse
 ### Move to Top, Move to Bottom
 ![gif](gif/move_to_top.gif)
 
+You don't need to press `Move Up/Down` button multiple times!
+
 ### Stick to Ground
 ![gif](gif/sticktoground.gif)
 
-Press `SpaceBar` to place an floating object on nearest ground.
+Press `SpaceBar` to place n floating object on nearest ground.
