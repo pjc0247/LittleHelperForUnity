@@ -51,3 +51,5 @@ When you clicked the asset to drag, inspector window will be changed to the asse
 
 ### Stick to Ground
 ![gif](gif/sticktoground.gif)
+
+Press `SpaceBar` to place an floating object on nearest ground.
