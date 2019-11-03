@@ -22,6 +22,12 @@ You can measure ditance between 2~ objects by selecting them. This is pretty use
 
 Unity does not show up object's size in fill mode(RectTransform). So I made it.
 
+### Quick Select
+![gif](gif/quickselect.gif)
+
+Press `Alt + 1` to select all texts with same __font__.<br>
+Press `Alt + 2` to select all texts with same __size__.
+
 ### Remember last property for Text
 ![gif](gif/textdata.gif)
 
