@@ -61,3 +61,10 @@ You don't need to press `Move Up/Down` button multiple times!
 ![gif](gif/sticktoground.gif)
 
 Press `SpaceBar` to place n floating object on nearest ground.
+
+
+Scripting
+----
+
+### Script template (Not implemented yet)
+Create a `template.cs.t` file to override Untiy's default template. This can be applied to each directory.
