@@ -66,5 +66,5 @@ Press `SpaceBar` to place n floating object on nearest ground.
 Scripting
 ----
 
-### Script template (Not implemented yet)
-Create a `template.cs.t` file to override Untiy's default template. This can be applied to each directory.
+### Script template
+Create a `template.tcs` file to override Untiy's default template. This can be applied to each directory.
