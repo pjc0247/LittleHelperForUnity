@@ -146,6 +146,9 @@ namespace LittleHelper {
                         text.fontSize = lastPropertyData.fontSize;
                     if (lastPropertyData.lineSpacing > 0)
                         text.lineSpacing = lastPropertyData.lineSpacing;
+                    text.horizontalOverflow = lastPropertyData.horizontal;
+                    text.verticalOverflow = lastPropertyData.vertical;
+                    text.color = lastPropertyData.color;
 
                     var lastFont = AssetDatabase.LoadAssetAtPath<Font>(AssetDatabase.GetAssetPath(lastPropertyData.fontAssetId));
                     if (lastFont != null)
@@ -193,6 +196,22 @@ namespace LittleHelper {
             var rt = go.GetComponent<RectTransform>();
             if (rt == null) return;
 
+            if (e.keyCode == KeyCode.Space)
+            {
+                var collider = go.GetComponent<Collider>();
+                if (collider != null)
+                {
+                    // RaycastAll??
+                    var hits = Physics.RaycastAll(go.transform.position, go.transform.up * -1);
+                    if (hits.Length > 0)
+                    {
+                        var yOffset = hits[0].collider.bounds.center.y + hits[0].collider.bounds.extents.y;
+                        var pos = go.transform.position;
+                        pos.y = yOffset + collider.bounds.extents.y;
+                        go.transform.position = pos;
+                    }
+                }
+            }
             if (features.UI_MoveByArrows)
             {
                 if (e.keyCode == KeyCode.UpArrow && e.control)
@@ -222,6 +241,12 @@ namespace LittleHelper {
                             lastPropertyData.lineSpacing = textTarget.lineSpacing;
                         else if (m.currentValue.propertyPath == "m_FontData.m_Alignment")
                             lastPropertyData.textAlign = textTarget.alignment;
+                        else if (m.currentValue.propertyPath == "m_FontData.m_HorizontalOverflow")
+                            lastPropertyData.horizontal = textTarget.horizontalOverflow;
+                        else if (m.currentValue.propertyPath == "m_FontData.m_VerticalOverflow")
+                            lastPropertyData.vertical = textTarget.verticalOverflow;
+                        else if (m.currentValue.propertyPath.StartsWith("m_Color."))
+                            lastPropertyData.color = textTarget.color;
                     }
 
                     if (features.UI_BatchModifyForText)
