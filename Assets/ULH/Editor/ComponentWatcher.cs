@@ -1,8 +1,10 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEditor;
 
 namespace LittleHelper {
@@ -75,28 +77,13 @@ namespace LittleHelper {
 
             if (e.type == EventType.KeyDown)
             {
+                PasteHexColor.OnKeyDown(e, isCtrlPressed);
                 Multiselect.OnKeydown(e, isAltPressed, isCtrlPressed);
             }
         }
 
         private static void OnUpdate()
         {
-            /*
-            if (DragAndDrop.objectReferences.Length > 0)
-            {
-                var go = DragAndDrop.objectReferences[0] as GameObject;
-                if (go != null && go.transform.GetSiblingIndex() == 0)
-                {
-                    var cam = SceneView.GetAllSceneCameras()[0];
-                    var hits = Physics.RaycastAll(cam.transform.position, cam.transform.position - go.transform.position);
-                    foreach (var hit in hits)
-                    {
-                        Debug.Log(hit);
-                    }
-                }
-            }
-            */
-
             if (features.KeepSelectionOnInspector)
             {
                 if (Selection.activeObject == null && lastSelectedGO != null)
@@ -159,9 +146,6 @@ namespace LittleHelper {
                         text.fontSize = lastPropertyData.fontSize;
                     if (lastPropertyData.lineSpacing > 0)
                         text.lineSpacing = lastPropertyData.lineSpacing;
-                    text.horizontalOverflow = lastPropertyData.horizontal;
-                    text.verticalOverflow = lastPropertyData.vertical;
-                    text.color = lastPropertyData.color;
 
                     var lastFont = AssetDatabase.LoadAssetAtPath<Font>(AssetDatabase.GetAssetPath(lastPropertyData.fontAssetId));
                     if (lastFont != null)
@@ -190,10 +174,14 @@ namespace LittleHelper {
                 if (features.UI_DisableRaycastForText)
                     text.raycastTarget = false;
             }
-            if (lastComp is AudioListener)
+            else if (lastComp is AudioListener)
             {
                 if (features.RemoveAudioListener)
                     DestroyImmediate(lastComp);
+            }
+            else if (lastComp is Button btnComp)
+            {
+                UnityEditor.Events.UnityEventTools.AddPersistentListener(btnComp.onClick);
             }
         }
 
@@ -202,38 +190,19 @@ namespace LittleHelper {
             if (Selection.objects.Length == 0) return;
             var go = Selection.objects[0] as GameObject;
             if (go == null) return;
-            
+            var rt = go.GetComponent<RectTransform>();
+            if (rt == null) return;
+
             if (features.UI_MoveByArrows)
             {
-                var rt = go.GetComponent<RectTransform>();
-                if (rt != null)
-                {
-                    if (e.keyCode == KeyCode.UpArrow && e.control)
-                        rt.anchoredPosition += new Vector2(0, 1);
-                    if (e.keyCode == KeyCode.DownArrow && e.control)
-                        rt.anchoredPosition += new Vector2(0, -1);
-                    if (e.keyCode == KeyCode.LeftArrow && e.control)
-                        rt.anchoredPosition += new Vector2(-1, 0);
-                    if (e.keyCode == KeyCode.RightArrow && e.control)
-                        rt.anchoredPosition += new Vector2(1, 0);
-                }
-            }
-
-            if (e.keyCode == KeyCode.Space)
-            {
-                var collider = go.GetComponent<Collider>();
-                if (collider != null)
-                {
-                    // RaycastAll??
-                    var hits = Physics.RaycastAll(go.transform.position, go.transform.up * -1);
-                    if (hits.Length > 0)
-                    {
-                        var yOffset = hits[0].collider.bounds.center.y + hits[0].collider.bounds.extents.y;
-                        var pos = go.transform.position;
-                        pos.y = yOffset + collider.bounds.extents.y;
-                        go.transform.position = pos;
-                    }
-                }
+                if (e.keyCode == KeyCode.UpArrow && e.control)
+                    rt.anchoredPosition += new Vector2(0, 1);
+                if (e.keyCode == KeyCode.DownArrow && e.control)
+                    rt.anchoredPosition += new Vector2(0, -1);
+                if (e.keyCode == KeyCode.LeftArrow && e.control)
+                    rt.anchoredPosition += new Vector2(-1, 0);
+                if (e.keyCode == KeyCode.RightArrow && e.control)
+                    rt.anchoredPosition += new Vector2(1, 0);
             }
         }
 
@@ -253,12 +222,6 @@ namespace LittleHelper {
                             lastPropertyData.lineSpacing = textTarget.lineSpacing;
                         else if (m.currentValue.propertyPath == "m_FontData.m_Alignment")
                             lastPropertyData.textAlign = textTarget.alignment;
-                        else if (m.currentValue.propertyPath == "m_FontData.m_HorizontalOverflow")
-                            lastPropertyData.horizontal = textTarget.horizontalOverflow;
-                        else if (m.currentValue.propertyPath == "m_FontData.m_VerticalOverflow")
-                            lastPropertyData.vertical = textTarget.verticalOverflow;
-                        else if (m.currentValue.propertyPath.StartsWith("m_Color."))
-                            lastPropertyData.color = textTarget.color;
                     }
 
                     if (features.UI_BatchModifyForText)
