@@ -4,6 +4,8 @@ LittleHelper
 This extension helps out people who suffer from Unity's poor UX.<br>
 It mostly does not add particular features, it just make Unity editor to act more naturally.
 
+* 
+
 Config
 ----
 ![CONFIG](img/config.png)
