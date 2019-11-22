@@ -16,7 +16,7 @@ namespace LittleHelper
             return Selection.objects[0] as GameObject;
         }
 
-        public static Component GetUIComponentFromSelection()
+        public static Graphic GetUIComponentFromSelection()
         {
             if (Selection.objects.Length != 1) return null;
 
