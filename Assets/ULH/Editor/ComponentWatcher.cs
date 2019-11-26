@@ -79,6 +79,7 @@ namespace LittleHelper {
             {
                 PasteHexColor.OnKeyDown(e, isCtrlPressed);
                 Multiselect.OnKeydown(e, isAltPressed, isCtrlPressed);
+                ObjectHotkey.OnKeyDown(e, isCtrlPressed);
             }
         }
 
