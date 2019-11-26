@@ -17,7 +17,7 @@ UI
 ### Distance Ruler
 ![img](img/ruler.png)
 
-You can measure ditance between 2~ objects by selecting them. This is pretty useful when you 're working with organized UI guides (such as zepplin).
+You can measure ditance between 2~ objects by selecting them. This is pretty useful when you are working with an UI guidelines (such as zepplin).
 
 ### Object Size
 ![img](img/sizeview.png)
