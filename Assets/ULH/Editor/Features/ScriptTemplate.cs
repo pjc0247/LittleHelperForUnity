@@ -60,5 +60,11 @@ namespace LittleHelper
 
             return null;
         }
+
+        [MenuItem("Assets/Create/ScriptTemplate(.tcs)", priority = 81)]
+        public static void CreateTemplate(MenuCommand cmd)
+        {
+            ProjectWindowUtil.CreateAssetWithContent("template.tcs", "");
+        }
     }
 }
